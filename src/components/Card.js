@@ -16,7 +16,7 @@ const Card = ({ submitHandler }) => {
         <div className="flex justify-between mb-7">
             <img src={logo} alt='logo' height={40} width={200} loading="lazy"/>
             <div>
-                <h2 className="flex justify-start heading mr-40">CodeForces Analyzer</h2>
+                <h1 className="flex justify-start heading ">CodeForces Analyzer</h1>
             </div>        
         </div>
 
@@ -29,9 +29,9 @@ const Card = ({ submitHandler }) => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Enter Codeforces Handle"
-                    className="text-center border-b-zinc-500 h-8"
+                    className="text-center border-[#243c5a] h-9"
                 />
-                <button type="submit" className="bg-black text-white font-sans rounded w-100 text-l h-8">Analyze</button>
+                <button type="submit" className="bg-slate-700 text-white font-sans rounded w-100 text-l font-bold h-9">Analyze</button>
             </div>
         </form>
 

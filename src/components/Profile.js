@@ -1,4 +1,5 @@
 import React from 'react'
+import './Profile.css'
 
 function Profile(props) {
     console.log(props.profileData);
@@ -13,8 +14,7 @@ function Profile(props) {
     const maxRank = user.maxRank;
     
   return (
-    <div>
-        <div className="flex bg-white p-10">
+        <div className="profile flex bg-white p-10">
             <div>
                 <h1>handle : {userName}</h1>
                 <h2>rating : {rating}</h2>
@@ -23,10 +23,9 @@ function Profile(props) {
                 <h2>max rank : {maxRank}</h2>
             </div>
             <div>
-                <img src={profilePhoto}/>
+                <img src={profilePhoto} alt=''/>
             </div>
         </div>
-    </div>
   )
 }
 

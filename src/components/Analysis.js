@@ -1,4 +1,5 @@
 import React from "react";
+import './Analysis.css';
 import SubmissionVerdictPieChart from "../charts/SubmissionVerdictPieChart";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, Legend } from "recharts";
 
@@ -50,19 +51,18 @@ function Analysis({ questionData }) {
 
   return (
     <div>
-      <h2>Analysis</h2>
 
-      <div className="verdictPieChart">
+      <div className="verdictPieChart box glass">
         <h3>Verdict Pie Chart</h3>
         <SubmissionVerdictPieChart pieChartData={pieChartData} />
       </div>
 
-      <div className="tagPieChart">
+      <div className="tagPieChart box">
         <h3>Problem Tags Pie Chart</h3>
         <SubmissionVerdictPieChart pieChartData={pieChartDataByTags} />
       </div>
 
-      <div className="ratingBarChart">
+      <div className="ratingBarChart box">
         <h3>Questions Solved by Rating</h3>
         <BarChart width={600} height={400} data={barChartDataByRating}>
           <CartesianGrid strokeDasharray="3 3" />
