@@ -1,12 +1,9 @@
 import React from "react";
-import './Analysis.css';
 import SubmissionVerdictPieChart from "../charts/SubmissionVerdictPieChart";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, Legend } from "recharts";
 
 function Analysis({ questionData }) {
   const submissions = Array.isArray(questionData.result) ? questionData.result : [];
-
-  console.log("Submissions:", submissions);
 
   const aggregatedData = submissions.reduce((acc, submission) => {
     acc[submission.verdict] = (acc[submission.verdict] || 0) + 1;
@@ -18,59 +15,50 @@ function Analysis({ questionData }) {
     value,
   }));
 
-  
-  // Aggregate data by tags
   const tagCounts = submissions.reduce((acc, submission) => {
     submission.problem.tags.forEach((tag) => {
       acc[tag] = (acc[tag] || 0) + 1;
     });
     return acc;
   }, {});
-  
-  // Format the data for the pie chart
+
   const pieChartDataByTags = Object.entries(tagCounts).map(([name, value]) => ({
     name,
     value,
   }));
 
-  console.log("Pie Chart Data by Tags:", pieChartDataByTags);
-
   const ratingCounts = submissions.reduce((acc, submission) => {
-    const rating = submission.problem.rating || "Unrated"; // Handle unrated problems
+    const rating = submission.problem.rating || "Unrated";
     acc[rating] = (acc[rating] || 0) + 1;
     return acc;
   }, {});
 
-  // Format the data for the bar chart
   const barChartDataByRating = Object.entries(ratingCounts).map(([rating, count]) => ({
     rating,
     count,
   }));
 
-  console.log("Bar Chart Data by Rating:", barChartDataByRating);
-
   return (
-    <div>
-
-      <div className="verdictPieChart box glass">
-        <h3>Verdict Pie Chart</h3>
+    <div className="max-w-6xl mx-auto px-4 py-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <div className="bg-gradient-to-br from-white to-blue-50 rounded-2xl shadow-lg p-6 hover:scale-[1.02] transition-transform">
+        <h3 className="text-xl font-semibold text-gray-800 mb-4">Verdict Pie Chart</h3>
         <SubmissionVerdictPieChart pieChartData={pieChartData} />
       </div>
 
-      <div className="tagPieChart box">
-        <h3>Problem Tags Pie Chart</h3>
+      <div className="bg-gradient-to-br from-white to-green-50 rounded-2xl shadow-lg p-6 hover:scale-[1.02] transition-transform">
+        <h3 className="text-xl font-semibold text-gray-800 mb-4">Problem Tags Pie Chart</h3>
         <SubmissionVerdictPieChart pieChartData={pieChartDataByTags} />
       </div>
 
-      <div className="ratingBarChart box">
-        <h3>Questions Solved by Rating</h3>
-        <BarChart width={600} height={400} data={barChartDataByRating}>
+      <div className="bg-gradient-to-br from-white to-purple-50 rounded-2xl shadow-lg p-6 hover:scale-[1.02] transition-transform col-span-full lg:col-span-1">
+        <h3 className="text-xl font-semibold text-gray-800 mb-4">Questions Solved by Rating</h3>
+        <BarChart width={500} height={300} data={barChartDataByRating}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="rating" />
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="count" fill="#8884d8" />
+          <Bar dataKey="count" fill="#7c3aed" />
         </BarChart>
       </div>
     </div>
