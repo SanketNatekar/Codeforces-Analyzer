@@ -1,6 +1,6 @@
 import React from "react";
 import SubmissionVerdictPieChart from "../charts/SubmissionVerdictPieChart";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, Legend } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, Legend, ResponsiveContainer } from "recharts";
 
 function Analysis({ questionData }) {
   const submissions = Array.isArray(questionData.result) ? questionData.result : [];
@@ -39,27 +39,38 @@ function Analysis({ questionData }) {
   }));
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-      <div className="bg-gradient-to-br from-white to-blue-50 rounded-2xl shadow-lg p-6 hover:scale-[1.02] transition-transform">
-        <h3 className="text-xl font-semibold text-gray-800 mb-4">Verdict Pie Chart</h3>
-        <SubmissionVerdictPieChart pieChartData={pieChartData} />
-      </div>
+    <div className="min-h-screen bg-gradient-to-b from-sky-900 to-sky-600 py-10 px-4">
+      <div className="max-w-5xl mx-auto flex flex-col gap-8">
 
-      <div className="bg-gradient-to-br from-white to-green-50 rounded-2xl shadow-lg p-6 hover:scale-[1.02] transition-transform">
-        <h3 className="text-xl font-semibold text-gray-800 mb-4">Problem Tags Pie Chart</h3>
-        <SubmissionVerdictPieChart pieChartData={pieChartDataByTags} />
-      </div>
+        {/* Verdict Pie Chart */}
+        <div className="bg-white/90 backdrop-blur-lg rounded-2xl shadow-xl p-6">
+          <h3 className="text-xl font-semibold text-gray-800 mb-4">Verdict Pie Chart</h3>
+          <SubmissionVerdictPieChart pieChartData={pieChartData} />
+        </div>
 
-      <div className="bg-gradient-to-br from-white to-purple-50 rounded-2xl shadow-lg p-6 hover:scale-[1.02] transition-transform col-span-full lg:col-span-1">
-        <h3 className="text-xl font-semibold text-gray-800 mb-4">Questions Solved by Rating</h3>
-        <BarChart width={500} height={300} data={barChartDataByRating}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="rating" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="count" fill="#7c3aed" />
-        </BarChart>
+        {/* Problem Tags Pie Chart */}
+        <div className="bg-white/90 backdrop-blur-lg rounded-2xl shadow-xl p-6">
+          <h3 className="text-xl font-semibold text-gray-800 mb-4">Problem Tags Pie Chart</h3>
+          <SubmissionVerdictPieChart pieChartData={pieChartDataByTags} />
+        </div>
+
+        {/* Rating Bar Chart */}
+        <div className="bg-white/90 backdrop-blur-lg rounded-2xl shadow-xl p-6">
+          <h3 className="text-xl font-semibold text-gray-800 mb-4">Questions Solved by Rating</h3>
+          <div className="w-full h-[400px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={barChartDataByRating}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="rating" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="count" fill="#7c3aed" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+        
       </div>
     </div>
   );
